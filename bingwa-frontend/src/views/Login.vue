@@ -1,17 +1,27 @@
 <template>
   <div class="login-container">
-    <h2>Login to Sahihi</h2>
-    <form>
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" v-model="email" required />
+    <div class="login-form">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Login to Sahihi</h2>
+        <p class="text-muted">Welcome back! Please enter your credentials.</p>
       </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" required />
-      </div>
-      <button type="submit" @click.prevent="login">Login</button>
-    </form>
+      <form @submit.prevent="login" class="needs-validation" novalidate>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="email" placeholder="name@example.com" v-model="email" required>
+          <label for="email">Email address</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="password" class="form-control" id="password" placeholder="Password" v-model="password" required>
+          <label for="password">Password</label>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary btn-lg">Login</button>
+        </div>
+        <div class="text-center mt-4">
+          <a href="#" class="text-muted text-decoration-none">Forgot password?</a>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -26,7 +36,6 @@ export default {
   },
   methods: {
     login() {
-      // Implement your login logic here
       console.log('Logging in with email:', this.email, 'and password:', this.password);
     },
   },
@@ -35,48 +44,42 @@ export default {
 
 <style scoped>
 .login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+  flex: 1;
+}
+
+.login-form {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   max-width: 400px;
-  margin: 0 auto;
-  padding: 40px;
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.btn-primary {
+  background-color: #9ECC3D;
+  border-color: #9ECC3D;
+  color: #000;
+  font-weight: 600;
+  padding: 0.8rem;
 }
 
-.form-group {
-  margin-bottom: 20px;
+.btn-primary:hover {
+  background-color: #79b320;
+  border-color: #79b320;
+  color: #000;
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
+.form-control:focus {
+  border-color: #9ECC3D;
+  box-shadow: 0 0 0 0.25rem rgba(158, 204, 61, 0.25);
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #35424a;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #263238;
+.form-floating label {
+  color: #6c757d;
 }
 </style>

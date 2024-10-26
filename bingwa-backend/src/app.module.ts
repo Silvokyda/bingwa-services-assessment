@@ -1,20 +1,22 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './external/auth/auth.module';
+import { UserModule } from './external/users/user.module';
+import { ormConfig } from './config/orm.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: +process.env.DB_PORT,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      autoLoadEntities: true,
-      synchronize: true,  // Enabled for development
+    // Load environment variables from .env file
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
+    // Configure TypeORM with MySQL settings from environment variables
+    TypeOrmModule.forRootAsync({
+      useFactory: ormConfig, 
+    }),
+    AuthModule,
+    UserModule,
   ],
 })
-export class AppModule {}
+export class AppModule { }

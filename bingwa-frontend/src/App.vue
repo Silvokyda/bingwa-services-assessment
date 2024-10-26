@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    
     <HeaderComponent />
-    <main>
+    <main class="main-content">
       <router-view />
     </main>
     <FooterComponent />
@@ -23,15 +22,19 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  text-align: center;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
-main {
+
+.main-content {
   flex: 1;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
 }
 </style>
