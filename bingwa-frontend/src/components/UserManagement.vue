@@ -7,7 +7,7 @@
           <i class="fas fa-user-plus"></i> Add New User
         </button>
         <div class="search-filter">
-          <input type="text" v-model="searchQuery" placeholder="Search users..." class="search-input">
+          <input type="text" v-model="searchQuery" placeholder="Search users..." class="search-input" />
           <select v-model="roleFilter" class="role-filter">
             <option value="">All Roles</option>
             <option value="ADMIN">Admin</option>
@@ -62,23 +62,21 @@
         </table>
       </div>
     </div>
+
     <div v-show="showModal" class="modal-overlay">
       <div class="main-modal">
         <div class="modal-header">
           <h3>Add New User</h3>
-          <button class="close-btn" @click="closeModal">
-            <i class="fas fa-times"></i>
-          </button>
         </div>
         <div class="modal-body">
           <form @submit.prevent="addUser">
             <div class="form-group">
               <label>Full Name</label>
-              <input type="text" v-model="newUser.name" required placeholder="Enter full name">
+              <input type="text" v-model="newUser.name" required placeholder="Enter full name" />
             </div>
             <div class="form-group">
               <label>Email</label>
-              <input type="email" v-model="newUser.email" required placeholder="Enter email address">
+              <input type="email" v-model="newUser.email" required placeholder="Enter email address" />
             </div>
             <div class="form-group">
               <label>Role</label>
@@ -111,6 +109,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -123,26 +123,15 @@ export default {
         role: 'ENGINEER',
         status: 'Active'
       },
-      users: [
-        {
-          id: 1,
-          name: 'John Doe',
-          email: 'john@example.com',
-          role: 'ENGINEER',
-          status: 'Active'
-        },
-        {
-          id: 2,
-          name: 'Jane Smith',
-          email: 'jane@example.com',
-          role: 'MANAGER',
-          status: 'Active'
-        }
-      ]
-    }
+      users: []
+    };
   },
   computed: {
     filteredUsers() {
+      // Check if users is an array before filtering
+      if (!Array.isArray(this.users)) {
+        return [];
+      }
       return this.users.filter(user => {
         const matchesSearch =
           user.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
@@ -153,8 +142,24 @@ export default {
     }
   },
   methods: {
+    async fetchUsers() {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users/`);
+
+        // Map the response to include the concatenated name
+        this.users = (response.data.data || []).map(user => ({
+          ...user,
+          name: `${user.firstName} ${user.lastName}`,
+          status:'Active'
+        }));
+
+        console.log('Users:', this.users);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        this.users = [];
+      }
+    },
     showAddUserModal() {
-      console.log('Opening modal');
       this.showModal = true;
     },
     closeModal() {
@@ -166,22 +171,26 @@ export default {
         status: 'Active'
       };
     },
-    addUser() {
-      const user = {
-        id: this.users.length + 1,
-        ...this.newUser
-      };
-      this.users.push(user);
-      this.closeModal();
+    async addUser() {
+      try {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/`, this.newUser);
+        this.users.push(response.data);
+        this.closeModal();
+      } catch (error) {
+        console.error('Error adding user:', error);
+      }
     },
     editUser(user) {
-      // Implementation
+      //To-Do: Implementation for editing user details
     },
     showDeleteConfirm(user) {
-      // Implementation
+      //o-Do: Implementation for confirming deletion of user
     }
+  },
+  created() {
+    this.fetchUsers(); // Fetch users when the component is created
   }
-}
+};
 </script>
 
 <style scoped>

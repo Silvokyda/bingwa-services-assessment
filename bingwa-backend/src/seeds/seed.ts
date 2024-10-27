@@ -145,6 +145,7 @@ const seedDatabase = async () => {
         endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
         customer: savedCustomers[0], 
         projectManager: savedUsers[2],
+        engineers: [savedUsers[1]]
       },
       {
         name: 'Project Beta',

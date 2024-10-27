@@ -1,14 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToMany,
+  ManyToOne,
+  CreateDateColumn,
+  UpdateDateColumn,
+  JoinTable 
+} from 'typeorm';
 import { User } from './user.entity';
 import { Customer } from './customer.entity';
-
-export enum ProjectStatus {
-  PLANNED = 'planned',
-  IN_PROGRESS = 'in_progress',
-  ON_HOLD = 'on_hold',
-  COMPLETED = 'completed',
-  CANCELLED = 'cancelled'
-}
+import { ProjectStatus } from '../common/enums/project-status.enum';
 
 @Entity('projects')
 export class Project {
@@ -40,7 +42,8 @@ export class Project {
   @ManyToOne(() => User)
   projectManager: User;
 
-  @ManyToMany(() => User)
+  @ManyToMany(() => User, { cascade: true })
+  @JoinTable()
   engineers: User[];
 
   @CreateDateColumn({ name: 'created_at' })
@@ -49,3 +52,5 @@ export class Project {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 }
+
+export { ProjectStatus } from '../common/enums/project-status.enum';
