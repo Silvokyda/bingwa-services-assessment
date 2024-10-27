@@ -1,4 +1,3 @@
-```markdown
 # bingwa-services-assessment
 
 ## Table of Contents
@@ -27,7 +26,7 @@ The **bingwa-services-assessment** project is a full-stack application with a Vu
 |-- /bingwa-backend
 |   |-- ... (NestJS backend code)
 |-- /bingwa-frontend
-|   |-- ... (Vue frontend code)
+|   |-- ... (Vue frontend code) 
 |-- README.md
 ```
 
@@ -36,7 +35,7 @@ The **bingwa-services-assessment** project is a full-stack application with a Vu
 Before running the application, ensure you have the following installed on your machine:
 
 - Node.js (v14 or later)
-- npm (Node Package Manager)
+- npm (Node Package Manager) 
 - A database system (e.g., PostgreSQL, MySQL, etc.) depending on your backend configuration
 
 ## Installation
@@ -50,7 +49,7 @@ git clone https://github.com/yourusername/bingwa-services-assessment.git
 cd bingwa-services-assessment
 ```
 
-### Backend Setup
+### Backend Setup 
 
 Navigate to the backend directory:
 
@@ -86,15 +85,15 @@ To run the Vue frontend:
 
 1. Navigate to the frontend directory (if not already there):
 
-   ```bash
-   cd bingwa-frontend
-   ```
+```bash
+cd bingwa-frontend
+```
 
 2. Start the development server:
 
-   ```bash
-   npm run dev
-   ```
+```bash
+npm run dev
+```
 
 3. Open your web browser and go to `http://localhost:3000` (or the port specified in your configuration).
 
@@ -104,29 +103,29 @@ To run the NestJS backend:
 
 1. Open a new terminal and navigate to the backend directory:
 
-   ```bash
-   cd bingwa-backend
-   ```
+```bash
+cd bingwa-backend
+```
 
 2. Run the database migrations:
 
-   ```bash
-   npm run migration:run
-   ```
+```bash
+npm run migration:run
+```
 
 3. Seed the database:
 
-   ```bash
-   npm run seed
-   ```
+```bash
+npm run seed
+```
 
 4. Start the backend server:
 
-   ```bash
-   npm run start
-   ```
+```bash
+npm run start
+```
 
-   The backend should now be running on `http://localhost:3001` (or the port specified in your configuration).
+The backend should now be running on `http://localhost:3001` (or the port specified in your configuration).
 
 ## Database Migrations
 
@@ -172,6 +171,3 @@ Here are the login credentials for different user roles:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-```
-
-Feel free to copy and paste this updated text into your `README.md` file!
