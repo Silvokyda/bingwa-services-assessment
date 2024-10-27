@@ -18,6 +18,10 @@
           <li><a href="https://www.sahihi.co.ke" @click="closeMenu">Home</a></li>
           <li><a href="https://www.sahihi.co.ke/services" @click="closeMenu">Services</a></li>
           <li><a href="https://www.sahihi.co.ke/portfolio" @click="closeMenu">Portfolio</a></li>
+          <!-- Logout Button -->
+          <li v-if="isLoggedIn">
+            <button @click="logout" class="logout-button">Logout</button>
+          </li>
         </ul>
       </nav>
     </div>
@@ -29,8 +33,15 @@ export default {
   name: 'HeaderComponent',
   data() {
     return {
-      isMenuOpen: false
-    }
+      isMenuOpen: false,
+      isLoggedIn: false, // State to track if user is logged in
+    };
+  },
+  created() {
+    // Check if token and role exist in localStorage
+    const token = localStorage.getItem('authToken');
+    const role = localStorage.getItem('role');
+    this.isLoggedIn = !!(token && role); 
   },
   methods: {
     toggleMenu() {
@@ -38,6 +49,13 @@ export default {
     },
     closeMenu() {
       this.isMenuOpen = false;
+    },
+    logout() {
+      // Clear localStorage
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('role');
+      // Redirect to home
+      this.$router.push('/');
     }
   }
 };
@@ -85,6 +103,19 @@ nav a {
 
 nav a:hover {
   color: #9ECC3D;
+}
+
+/* Logout Button Styles */
+.logout-button {
+  background-color: transparent;
+  border: none;
+  color: #9ECC3D;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logout-button:hover {
+  text-decoration: underline;
 }
 
 .menu-toggle {

@@ -8,7 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'Login',
-    component: LoginView, // Set the login view as the default
+    component: LoginView, 
   },
   {
     path: '/home',
@@ -35,9 +35,8 @@ const router = createRouter({
 
 // Navigation guard to check authentication
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = !!localStorage.getItem('role'); // Check if a role is stored
+  const isAuthenticated = !!localStorage.getItem('role');
 
-  // If the user is not authenticated and trying to access a protected route, redirect to login
   if (!isAuthenticated && to.name !== 'Login') {
     next({ name: 'Login' });
   } else {

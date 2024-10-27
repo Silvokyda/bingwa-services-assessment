@@ -6,6 +6,13 @@ import AppDataSource from './config/orm.config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Enable CORS for all origins
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type, Authorization',
+  });
+
   // Check the database connection
   const dataSource = new DataSource(AppDataSource.options);
 

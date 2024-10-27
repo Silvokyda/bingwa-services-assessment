@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../../users/services/user.service';
 import { User } from '../../../entities/user.entity';
-import { ResponseDto } from '../../../common/dto/response.dto'; 
+import { ResponseDto } from '../../../common/dto/response.dto';
+import * as bcrypt from 'bcrypt'; 
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,8 @@ export class AuthService {
         const userResponse = await this.userService.findByEmail(email);
         const user = userResponse.data; 
 
-        if (user && user.password === password) { 
+        // Compare the provided password with the hashed password in the database
+        if (user && await bcrypt.compare(password, user.password)) {
             return user;
         }
         return null;
