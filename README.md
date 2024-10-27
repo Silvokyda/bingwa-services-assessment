@@ -45,7 +45,7 @@ Before running the application, ensure you have the following installed on your 
 Clone the repository to your local machine using:
 
 ```bash
-git clone https://github.com/yourusername/bingwa-services-assessment.git
+git clone https://github.com/Silvokyda/bingwa-services-assessment.git
 cd bingwa-services-assessment
 ```
 
@@ -95,7 +95,7 @@ cd bingwa-frontend
 npm run dev
 ```
 
-3. Open your web browser and go to `http://localhost:3000` (or the port specified in your configuration).
+3. Open your web browser and go to `http://localhost:5173` (or the port specified in your configuration).
 
 ### Backend
 
@@ -125,7 +125,7 @@ npm run seed
 npm run start
 ```
 
-The backend should now be running on `http://localhost:3001` (or the port specified in your configuration).
+The backend should now be running on `http://localhost:3000` (or the port specified in your configuration).
 
 ## Database Migrations
 
